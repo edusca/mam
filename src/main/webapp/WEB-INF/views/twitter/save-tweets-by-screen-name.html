@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+        <link rel="stylesheet" href="../dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}"/>
+        <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}"/>
+        <title></title>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <div th:include="fragments/header :: header"/>
+            <div th:include="fragments/sidebar :: sidebar"/>
+            <div class="content-wrapper" style="min-height: 298px;">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Guardar tweets para su posterior procesamiento</h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content"> 
+                    <span>Al ingresar el screen name de un usuario, este proceso
+                        empezará a buscar tweets del mismo, así como también los replies
+                        de cada tweet que se puedan conseguir.
+                        Se deberá tener en cuenta los límites que Twitter
+                        provee para no excederse y bloquear la aplicación.
+                        Estos tiempos se encuentran en la dirección de la API de Twitter
+                        en la siguiente dirección: <a target="_blank" href="https://dev.twitter.com/rest/public/rate-limiting">Twitter Rate Limits...</a></span>
+                    <div>
+                        <label>Ingrese los screen name de los usuarios
+                        (Separados por guiones "-")</label><input type="text" id="screenNames" />
+                        <button id="send-name">Send</button>
+                        <button id="clear-content-box">Limpiar</button>
+                        <div id="response-content-box">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div th:include="fragments/footer :: footer"/>
+        </div>
+
+        <!-- REQUIRED JS SCRIPTS -->
+        <script src="../plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+        <script src="../bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../dist/js/app.min.js" th:src="@{/dist/js/app.min.js}"></script>
+        <script src="../mam/js/sockjs/sockjs-0.3.4.min.js" th:src="@{/mam/js/sockjs/sockjs-0.3.4.min.js}"></script>
+        <script src="../mam/js/stomp.min.js" th:src="@{/mam/js/stomp.min.js}"></script>
+        <script src="../mam/js/save-tweets.js" th:src="@{/mam/js/save-tweets-by-screen-name.js}"></script>
+    </body>
+</html>

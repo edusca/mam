@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+        <link rel="stylesheet" href="../dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}"/>
+        <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}"/>
+
+        <title></title>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <div th:include="fragments/header :: header"/>
+            <div th:include="fragments/sidebar :: sidebar"/>
+            <div class="content-wrapper" style="min-height: 298px;">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Tweets guardados</h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content"> 
+                    <form role="form" action="#" th:action="@{/twitter/saved-tweets}" method="GET">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="textValues">Ingrese cadenas de texto para la búsqueda en al BD:</label>
+                                <input type="text" id="textValues" name="textValues"/>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <input class="btn btn-primary" type="submit" id="btnSearchTweets" value="Buscar"/>
+                        </div>
+                    </form>      
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Followers</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th>Tweet</th>
+                                    </tr>
+                                        <tr th:each="tweet : ${tweets}">
+                                            <td th:text="${tweet.text}">Text ...</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div th:include="fragments/footer :: footer"/>
+        </div>
+
+        <!-- REQUIRED JS SCRIPTS -->
+        <script src="../plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+        <script src="../bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../dist/js/app.min.js" th:src="@{/dist/js/app.min.js}"></script>
+    </body>
+</html>
