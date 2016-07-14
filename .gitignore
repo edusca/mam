@@ -1,4 +1,4 @@
 nbactions.xml
 nb-configuration.xml
 /target
-/warfile
+/warfile/*
