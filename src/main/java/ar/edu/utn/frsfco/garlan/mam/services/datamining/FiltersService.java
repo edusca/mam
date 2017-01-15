@@ -8,6 +8,7 @@ import weka.attributeSelection.BestFirst;
 import weka.attributeSelection.CfsSubsetEval;
 import weka.core.Instances;
 import weka.core.Utils;
+import weka.core.tokenizers.NGramTokenizer;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.AttributeSelection;
 import weka.filters.unsupervised.attribute.StringToWordVector;
@@ -35,6 +36,9 @@ public class FiltersService {
         
         try {
             StringToWordVector filter = new StringToWordVector();
+            NGramTokenizer tokenizer = new NGramTokenizer();
+            tokenizer.setNGramMaxSize(3);
+            tokenizer.setNGramMaxSize(1);
             filter.setInputFormat(filteredDataset);
             filteredDataset = Filter.useFilter(filteredDataset, filter);
         } catch (Exception ex) {

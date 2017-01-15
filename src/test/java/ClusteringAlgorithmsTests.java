@@ -34,7 +34,7 @@ public class ClusteringAlgorithmsTests {
         inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
         
         kmeansService.classify(inMemoryDataSource.getFilteredDataSet());
-        //kmeansService.printAssignments();
+        kmeansService.printAssignments();
         kmeansService.printClustersSizes();
     }
 }

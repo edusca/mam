@@ -180,6 +180,8 @@ public class TwitterService {
         message.setTextLanguageCode(tweet.getLanguageCode());
         message.setToUserId(tweet.getToUserId());
         message.setFromUserId(tweet.getFromUserId());
+        message.setIsARetweet(tweet.isRetweet());
+       
         messageRepository.save(message);
     }
 

@@ -34,7 +34,7 @@ public class FiltersServiceTest {
     FiltersService filtersService;
     
     @Test
-    public void showKMeansAssignments() {
+    public void showKMeansAssignmentsUsingAttributeSelection() {
         inMemoryDataSource.initDataSource();
         inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
 
@@ -43,6 +43,23 @@ public class FiltersServiceTest {
         );
         
         System.out.println(featuresSelected);
+        Assert.assertNotNull("There are not instances in the dataset", featuresSelected);
+    }
+    
+    @Test
+    public void showKMeansAssignmentsUsingStringToWordVector() {
+        inMemoryDataSource.initDataSource();
+        inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
+
+        Instances featuresSelected =  filtersService.applyStringToWordVector(
+                inMemoryDataSource.getFilteredDataSet()
+        );
+        
+        for (int j = 0; j < featuresSelected.numInstances(); j++) {
+		Instance currentInstance = featuresSelected.instance(j);
+                System.out.println(currentInstance);
+	}
+        
         Assert.assertNotNull("There are not instances in the dataset", featuresSelected);
     }
 }

@@ -20,6 +20,8 @@ public class TwitterMessage extends Message{
     //Use this extra attributes from a tweet for create the graph db
     private long fromUserId;
     private long toUserId;
+    
+    private Boolean isARetweet;
 
     public String getUserScreenName() {
         return userScreenName;
@@ -69,4 +71,11 @@ public class TwitterMessage extends Message{
         this.toUserId = toUserId;
     }
     
+    public Boolean isARetweet() {
+        return this.isARetweet;
+    }
+    
+    public void setIsARetweet(Boolean isARetweet) {
+        this.isARetweet = isARetweet;
+    }
 }

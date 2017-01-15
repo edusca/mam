@@ -22,6 +22,7 @@ import weka.core.Instances;
 @Qualifier(value = "kmeansService")
 public class KMeansService {
     private SimpleKMeans kmeansClassifier;
+    private Instances currentDataSource;
     
     public KMeansService() {
     }
@@ -33,6 +34,7 @@ public class KMeansService {
             kmeansClassifier.setPreserveInstancesOrder(true);
             kmeansClassifier.setNumClusters(5);
             kmeansClassifier.buildClusterer(dataSource);
+            currentDataSource = dataSource;
         } catch (Exception ex) {
             Logger.getLogger(KMeansService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,7 +45,8 @@ public class KMeansService {
             //cluster number for each instance
             int i = 0;
             for (int clusterNum : kmeansClassifier.getAssignments()) {
-                System.out.printf("Instance %d -> Cluster %d \n", i, clusterNum);
+                String instanceValue = currentDataSource.instance(i).attribute(1).value(0);
+                System.out.printf("Instance value: " + instanceValue);
                 i++;
                 
             }
