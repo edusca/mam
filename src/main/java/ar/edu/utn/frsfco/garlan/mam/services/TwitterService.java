@@ -5,15 +5,16 @@ import ar.edu.utn.frsfco.garlan.mam.models.TwitterMessage;
 import ar.edu.utn.frsfco.garlan.mam.repositories.MessageRepository;
 import ar.edu.utn.frsfco.garlan.mam.websocket.WebSocketLiterals;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
@@ -50,8 +51,6 @@ import weka.core.Debug;
 @Service
 @Qualifier("twitterService")
 public class TwitterService {
-    private static final Logger logger = Logger.getLogger(TwitterService.class); 
-    
     private static final int TWEETS_QUANTITY_FOR_ONE_REQUEST = 200;
     /*
      * By reading the documentation, the api returns a maximum of 100 for page, 
@@ -104,7 +103,6 @@ public class TwitterService {
 
     /**
      * @param screenName screen name of the selected user
-     * @param cursor
      * @return the friends of the selected user. Can be up to 5000 followers (using a pager)
      */
     public List<TwitterProfile> getAllFollowersFromUser(String screenName) {
@@ -305,7 +303,7 @@ public class TwitterService {
     /**
      * Important: The tweets are of the past seven days, the documentation here
      * @param query 
-     * @see https://dev.twitter.com/rest/public/search
+     * @see {https://dev.twitter.com/rest/public/search}
      */
     public void saveTweetsByQuery(String query) {
         SearchParameters sp = new SearchParameters(query);
@@ -341,5 +339,11 @@ public class TwitterService {
         Query query = TextQuery.query(criteria);
         
         return mongoTemplate.find(query, TwitterMessage.class);
+    }
+
+    public List<TwitterMessage> getAllTweetsThatAreNotRetweet() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("isARetweet").is(false));
+        return mongoTemplate.find(query, TwitterMessage.class).subList(0, 8000);
     }
 }

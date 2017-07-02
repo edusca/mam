@@ -32,7 +32,6 @@ public class WekaDataSourceTest {
         Instances dataSet = null;
         
         inMemoryDataSource.initDataSource();
-        inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
         dataSet = inMemoryDataSource.getDataSet();
         
         if(dataSet == null) {

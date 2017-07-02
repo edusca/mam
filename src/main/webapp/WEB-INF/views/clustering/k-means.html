@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+        <link rel="stylesheet" href="../dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}"/>
+        <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}"/>
+        <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+        <!--<script th:src="@{/mam/js/d3.layout.cloud.js}"></script>-->
+        <title></title>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <div th:include="fragments/header :: header"/>
+            <div th:include="fragments/sidebar :: sidebar"/>
+            <div class="content-wrapper" style="min-height: 298px;">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>Análisis de datos - Clustering - Algoritmo K-Means</h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-solid">
+                                <div class="box-body">
+                                    <form role="form" action="#" th:action="@{/clustering/k-means/classify}" method="GET">
+                                        <label for="cluster-numbers">Clusters numbers:</label>
+                                        <input type="number" value="5" id="cluster-numbers" name="cluster_numbers"/>
+
+                                        <label for="iterations">Iterations:</label>
+                                        <input type="number" value="10" id="iterations" name="iterations"/>
+
+                                        <label for="seed">Seed:</label>
+                                        <input type="number" value="10" id="seed" name="seed"/>
+
+                                        <input type="submit" value="Enviar" class="btn btn-primary"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Clusters assignments</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div th:each="assignment : ${assignments}" class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+                                            <div class="info-box-content">
+                                                <span th:text="${assignment.getClusterNumber()}" class="info-box-text">Cluster 1</span>
+                                                <span th:text="${assignment.getAssignmentsQuantity()}" class="info-box-number">12500</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Bag of words</h3>
+                            </div>
+                            <div class="box-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div th:include="fragments/footer :: footer"/>
+        </div>
+
+        <!-- REQUIRED JS SCRIPTS -->
+        <script src="../plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+        <script src="../bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../dist/js/app.min.js" th:src="@{/dist/js/app.min.js}"></script>
+        <script src="../mam/js/clustering-kmeans.js" th:src="@{/mam/js/clustering-kmeans.js}"></script>
+    </body>
+</html>

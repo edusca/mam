@@ -3,9 +3,12 @@ package ar.edu.utn.frsfco.garlan.mam.services.datamining;
 import ar.edu.utn.frsfco.garlan.mam.models.Message;
 import ar.edu.utn.frsfco.garlan.mam.models.TwitterMessage;
 import ar.edu.utn.frsfco.garlan.mam.services.TwitterService;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
@@ -28,6 +31,8 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
 @Service
 @Qualifier(value = "inMemoryDataSource")
 public class InMemoryDataSource {
+    static final Logger logger = LogManager.getLogger(InMemoryDataSource.class);
+
     public static final String ALL_MESSAGES_DATA_SET = "ALL_MESSAGES_DATA_SET";
     public static final String ATTR_ID = "id";
     public static final String ATTR_MESSAGE = "message";
@@ -40,6 +45,9 @@ public class InMemoryDataSource {
     
     @Autowired
     private FiltersService filtersService;
+
+    @Autowired
+    private TwitterService twitterService;
     
     public void initDataSource() {
         idAttr = new Attribute(ATTR_ID, (FastVector)null);
@@ -53,23 +61,23 @@ public class InMemoryDataSource {
     
     /**
      * Fill the dataset with domain messages
-     * @param messages all the messages for the current dataset
      */
-    public void fillDataSet(List<Message> messages) {
+    public void fillDataSetWithTwitterMessage() {
+        List<TwitterMessage> messages = twitterService.getAllTweetsThatAreNotRetweet();
         try {
+            logger.error(messages.size());
+
             for (Message message : messages) {
-                TwitterMessage currentMessage = (TwitterMessage) message;
-                
                 Instance newInstance = new Instance(2);
-                newInstance.setValue(idAttr, String.valueOf(currentMessage.getId()));
-                newInstance.setValue(messageAttr, currentMessage.getText());
+                newInstance.setValue(idAttr, String.valueOf(message.getId()));
+                newInstance.setValue(messageAttr, message.getText());
                 
                 dataSet.add(newInstance);
             }
             filteredDataSet = dataSet;
             filteredDataSet = filtersService.applyStringToWordVector(filteredDataSet);
         } catch (Exception ex) {
-            Logger.getLogger(InMemoryDataSource.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error(ex.getMessage());
         }
     }
 

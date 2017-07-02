@@ -7,7 +7,9 @@ import ar.edu.utn.frsfco.garlan.mam.websocket.WebSocketLiterals;
 import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -34,7 +36,7 @@ import org.springframework.web.socket.TextMessage;
  */
 @Controller
 public class TwitterController {
-    private static final Logger logger = Logger.getLogger(TwitterController.class);  
+    private static final Logger logger = LogManager.getLogger(TwitterController.class);
     
     @Autowired
     @Qualifier("twitterService") 
@@ -122,9 +124,9 @@ public class TwitterController {
     @RequestMapping(value = "/twitter/saved-tweets", params = "textValues", method = RequestMethod.GET)
     public String searchSavedTweetsByText(@RequestParam("textValues") String text, Model model) {
         List<TwitterMessage> tweets = twitterService.getTweetsByTextSearch(text);
-        
+
         model.addAttribute("tweets", tweets);
-        
+
         return "twitter/saved-tweets";
     }
 }

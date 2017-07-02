@@ -36,7 +36,6 @@ public class FiltersServiceTest {
     @Test
     public void showKMeansAssignmentsUsingAttributeSelection() {
         inMemoryDataSource.initDataSource();
-        inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
 
         Instances featuresSelected =  filtersService.applyAttributeSelection(
                 inMemoryDataSource.getFilteredDataSet()
@@ -49,7 +48,6 @@ public class FiltersServiceTest {
     @Test
     public void showKMeansAssignmentsUsingStringToWordVector() {
         inMemoryDataSource.initDataSource();
-        inMemoryDataSource.fillDataSet(twitterService.findAllMessages());
 
         Instances featuresSelected =  filtersService.applyStringToWordVector(
                 inMemoryDataSource.getFilteredDataSet()
