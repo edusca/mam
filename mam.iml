@@ -71,5 +71,14 @@
     <orderEntry type="library" name="Maven: redis.clients:jedis:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.1" level="project" />
+    <orderEntry type="library" name="Maven: com.kennycason:kumo-core:1.11" level="project" />
+    <orderEntry type="library" name="Maven: com.kennycason:kumo-api:1.11" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.8.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Maven: com.github.davidmoten:rtree:0.8.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.davidmoten:guava-mini:0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.reactivex:rxjava:1.2.10" level="project" />
+    <orderEntry type="library" name="Maven: com.github.davidmoten:rxjava-extras:0.8.0.7" level="project" />
   </component>
 </module>

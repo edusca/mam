@@ -22,5 +22,6 @@ public class WevMVCConfig extends WebMvcConfigurerAdapter{
         registry.addResourceHandler("/dist/**").addResourceLocations("/WEB-INF/resources/dist/");
         registry.addResourceHandler("/plugins/**").addResourceLocations("/WEB-INF/resources/plugins/");
         registry.addResourceHandler("/mam/**").addResourceLocations("/WEB-INF/resources/mam/");
+        registry.addResourceHandler("/word_cloud_images/**").addResourceLocations("file:/mam/output/");
     }
 }

@@ -240,6 +240,14 @@
             <version>2.8.1</version>
         </dependency>
         <!-- Serializers -->
+
+        <!-- Word cloud generators -->
+        <dependency>
+            <groupId>com.kennycason</groupId>
+            <artifactId>kumo-core</artifactId>
+            <version>1.11</version>
+        </dependency>
+        <!-- Word cloud generators -->
         
     </dependencies>
     

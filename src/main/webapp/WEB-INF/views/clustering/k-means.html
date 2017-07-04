@@ -24,6 +24,9 @@
 
                 <!-- Main content -->
                 <section class="content">
+                    <input type="hidden" id="current-cluster-numbers" th:value="${current_cluster_numbers}"/>
+                    <input type="hidden" id="current-cluster-iterations" th:value="${current_cluster_iterations}"/>
+                    <input type="hidden" id="current-cluster-seed" th:value="${current_cluster_seed}"/>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box box-solid">
@@ -51,8 +54,12 @@
                                 <div class="box-header with-border">
                                     <h3 class="box-title">Clusters assignments</h3>
                                 </div>
+                                <p>
+                                    <h1 th:text="${pathImage}"></h1>
+                                </p>
                                 <div class="box-body">
-                                    <div th:each="assignment : ${assignments}" class="col-md-3 col-sm-6 col-xs-12">
+                                    <div th:each="assignment : ${assignments}" class="col-md-3 col-sm-6 col-xs-12 js-current-cluster">
+                                        <input type="hidden" th:value="${assignment.getClusterNumber()}"/>
                                         <div class="info-box">
                                             <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
@@ -69,11 +76,13 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Bag of words</h3>
-                            </div>
-                            <div class="box-body">
-
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Bag of words</h3>
+                                </div>
+                                <div class="box-body">
+                                    <img id="word-cloud-image" class="col-md-12 img-responsive" src="#"/>
+                                </div>
                             </div>
                         </div>
                     </div>
